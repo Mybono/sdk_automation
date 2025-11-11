@@ -1,6 +1,6 @@
 {
   "name": "sdk_automation",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "SDK for automation testing with MongoDB",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
