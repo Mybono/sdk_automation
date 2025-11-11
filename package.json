@@ -1,6 +1,6 @@
 {
   "name": "@mybono/sdk_automation",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "SDK for automation testing with MongoDB",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,7 @@
     "url": "git+https://github.com/Mybono/sdk_automation.git"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
