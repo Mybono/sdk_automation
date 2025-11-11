@@ -22,3 +22,4 @@ rad.json
 TestResults.xml
 /dist
 /node_modules
+./env
