@@ -1,1 +1,4 @@
-# sdk_automation
+```powershell
+npm run build  
+npm publish 
+```
