@@ -2,7 +2,8 @@
 
 ![npm version](https://img.shields.io/npm/v/sdk_automation?color=brightgreen)
 ![License](https://img.shields.io/npm/l/sdk_automation)
-![Build](https://img.shields.io/github/actions/workflow/status/your-username/qa-portfolio/build.yml?branch=main&label=CI&color=blue)
+![Build](https://img.shields.io/github/actions/workflow/status/mybono/sdk_automation/build.yml?branch=main&label=CI&color=blue)
+
 
 **SDK Automation** is a public npm package created for the [QA Portfolio](https://github.com/your-username/qa-portfolio) demo project.  
 It provides utilities, services, and helpers for automated testing, logging, data handling, and test data generation.
@@ -20,8 +21,7 @@ npm install sdk_automation
 ## 💡 Quick Start
 ```bash
 
-import { logger } from 'sdk_automation';
-import { UserService } from 'sdk_automation/dist/src/services/UserService';
+import { logger, UserService } from 'sdk_automation';
 
 // Logging example
 logger.log('Hello from SDK Automation!');
