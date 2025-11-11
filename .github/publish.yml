@@ -1,41 +1,25 @@
-name: Publish @mybono/sdk_automation
+name: Publish SDK package
 
 on:
   push:
-    branches:
-      - master
-    paths:
-      - 'package.json'
-      - 'src/**'
-      - 'tsconfig.json'
+    branches: [ main ]
 
 jobs:
   publish:
-    name: 📦 Publish SDK package
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
-      packages: write 
+      packages: write  
 
     steps:
-      - name: 🛎️ Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🧩 Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@mybono'
 
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🏗️ Build package
-        run: npm run build
-
-      - name: 🚀 Publish to GitHub Packages
-        run: npm publish
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
