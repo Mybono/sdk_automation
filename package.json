@@ -1,13 +1,22 @@
 {
-  "name": "sdk",
+  "name": "@mybono/sdk_automation",
   "version": "1.0.0",
-  "main": "dist/index.js", 
+  "description": "SDK for automation testing with MongoDB",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-
-  "scripts": { 
-    "build": "tsc" 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mybono/sdk_automation.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "mongodb": "6.8.0"
