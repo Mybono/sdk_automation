@@ -1,7 +1,7 @@
 # SDK Automation
 
 ![npm version](https://img.shields.io/npm/v/sdk_automation?color=brightgreen)
-![License](https://img.shields.io/npm/l/sdk_automation)
+![License](https://img.shields.io/npm/l/sdk_automation?color=blue)
 ![Build](https://img.shields.io/github/actions/workflow/status/Mybono/sdk_automation/build.yml?branch=main&label=CI&color=blue)
 
 
