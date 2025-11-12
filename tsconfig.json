@@ -4,24 +4,18 @@
     "module": "CommonJS",
     "rootDir": ".",
     "outDir": "dist",
-    "declaration": true, 
+    "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "baseUrl": ".", 
+    "types": ["node", "jest"],
+    "baseUrl": ".",
     "paths": {
-      "@sdk/*": [
-        "./*"
-      ]
+      "@sdk/*": ["./*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "dist" 
-  ],
-  "include": [
-    "./**/*"
-  ]
+  "exclude": ["node_modules", "dist"],
+  "include": ["./**/*"]
 }
