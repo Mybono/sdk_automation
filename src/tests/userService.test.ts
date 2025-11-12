@@ -7,6 +7,8 @@ describe("UserService", () => {
   const mockInsertOne = jest.fn();
   const mockFindOne = jest.fn();
 
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mockDb: any = {
     collection: () => ({
       insertOne: mockInsertOne,
