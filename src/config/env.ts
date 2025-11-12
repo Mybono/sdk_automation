@@ -1,28 +1,15 @@
 import { UserRoleType, Credentials } from "../interfaces";
-import * as dotenv from "dotenv";
-
-dotenv.config();
-function requireEnv(name: string): string {
-  // eslint-disable-next-line no-undef
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(
-      `[requireEnv]: Missing required environment variable: ${name}`,
-    );
-  }
-  return value;
-}
 
 export const env = {
-  BASE_URL: requireEnv("BASE_URL"),
-  STANDART_USER: requireEnv("STANDART_USER"),
-  LOCKED_OUT_USER: requireEnv("LOCKED_OUT_USER"),
-  PROBLEM_USER: requireEnv("PROBLEM_USER"),
-  GLITCH_USER: requireEnv("GLITCH_USER"),
-  ERROR_USER: requireEnv("ERROR_USER"),
-  VISUAL_USER: requireEnv("VISUAL_USER"),
-  PASSWORD: requireEnv("PASSWORD"),
-  MONGO_CONNECTION_STRING: requireEnv("MONGO_CONNECTION_STRING"),
+  BASE_URL: "https://www.saucedemo.com/",
+  STANDART_USER: "standard_user",
+  LOCKED_OUT_USER: "locked_out_user",
+  PROBLEM_USER: "problem_user",
+  GLITCH_USER: "performance_glitch_user",
+  ERROR_USER: "error_user",
+  VISUAL_USER: "visual_user",
+  PASSWORD: "secret_sauce",
+  MONGO_CONNECTION_STRING: "mongodb://mongo:27017/qa_portfolio",
   TIMEOUT: 5000,
   TEN_SECONDS: 10000,
 } as const;
