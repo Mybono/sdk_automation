@@ -5,7 +5,7 @@ export default {
   testMatch: ["**/src/**/*.test.ts"],
   clearMocks: true,
   collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov'],
-  collectCoverageFrom: ['src/**/*.ts'],
+  coverageDirectory: "coverage",
+  coverageReporters: ["text", "lcov"],
+  collectCoverageFrom: ["src/**/*.ts"],
 };

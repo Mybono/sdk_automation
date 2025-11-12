@@ -37,7 +37,7 @@ describe("AssetsTracker", () => {
 
       expect(tracker["trackedAssets"].users).toContain(assetId);
       expect(logger.debug).toHaveBeenCalledWith(
-        `Tracked asset ID ${assetId} in collection users`
+        `Tracked asset ID ${assetId} in collection users`,
       );
     });
   });
@@ -51,9 +51,11 @@ describe("AssetsTracker", () => {
       await tracker.cleanup({ users: true });
 
       expect(mockDb.collection).toHaveBeenCalledWith("users");
-      expect(mockCollection.deleteMany).toHaveBeenCalledWith({ _id: { $in: [id1, id2] } });
+      expect(mockCollection.deleteMany).toHaveBeenCalledWith({
+        _id: { $in: [id1, id2] },
+      });
       expect(logger.info).toHaveBeenCalledWith(
-        `Deleted 2/2 assets from collection users`
+        `Deleted 2/2 assets from collection users`,
       );
       expect(tracker["trackedAssets"].users).toEqual([]);
     });
