@@ -10,9 +10,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mybono/qa-portfolio.git"
+    "url": "https://github.com/Mybono/qa-portfolio.git"
   },
-  "homepage": "https://github.com/mybono/sdk_automation",
+  "homepage": "https://github.com/Mybono/sdk_automation",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
