@@ -24,9 +24,9 @@ class Logger {
   private colorize(level: LogLevel, message: string): string {
     const colors: Record<LogLevel, string> = {
       error: "\x1b[31m", // red
-      warn: "\x1b[33m",  // yellow
-      info: "\x1b[32m",  // green
-      log: "\x1b[37m",   // white
+      warn: "\x1b[33m", // yellow
+      info: "\x1b[32m", // green
+      log: "\x1b[37m", // white
       debug: "\x1b[36m", // cyan
     };
     const reset = "\x1b[0m";
