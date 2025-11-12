@@ -1,6 +1,7 @@
 import { DbConnection } from "../services/DbConnection";
 import { MongoClient } from "mongodb";
 import { logger } from "../utils";
+import { env } from "../config";
 
 jest.mock("../utils", () => ({
   logger: {
@@ -23,8 +24,6 @@ jest.mock("mongodb", () => {
 });
 
 describe("DbConnection", () => {
-  const connectionString = "mongodb://localhost:27017/test";
-
   let dbConnection: DbConnection;
 
   beforeEach(() => {
@@ -39,15 +38,15 @@ describe("DbConnection", () => {
   });
 
   it("should return existing connection if already connected", async () => {
-    const firstDb = await dbConnection.openConnection(connectionString);
-    const secondDb = await dbConnection.openConnection(connectionString);
+    const firstDb = await dbConnection.openConnection(env.MONGO_CONNECTION_STRING);
+    const secondDb = await dbConnection.openConnection(env.MONGO_CONNECTION_STRING);
 
     expect(MongoClient).toHaveBeenCalledTimes(1);
     expect(firstDb).toBe(secondDb);
   });
 
   it("should close connection if connected", async () => {
-    await dbConnection.openConnection(connectionString);
+    await dbConnection.openConnection(env.MONGO_CONNECTION_STRING);
     await dbConnection.closeConnection();
 
     expect(dbConnection["isConnected"]).toBe(false);
