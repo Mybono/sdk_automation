@@ -65,6 +65,48 @@ test('example test', async ({ page }) => {
 });
 ```
 
+## ⚙️ CI/CD Workflows
+
+This project has **two GitHub Actions workflows** to ensure code quality and automate package publishing:
+
+---
+
+### 1️⃣ Pull Request Workflow (`ci-pr.yml`)
+
+- **Trigger:** `on: pull_request` targeting `main` branch  
+- **Purpose:** run full CI for every PR before merge  
+- **Jobs:**
+  - Checkout repository
+  - Setup Node.js
+  - Install dependencies (`npm ci`)
+  - TypeScript type check (`npx tsc --noEmit`)
+  - Lint code (`npm run lint`)
+  - Run unit tests (`npm test`)
+  - Audit dependencies (`npm audit --audit-level=moderate`)
+
+> ⚠️ This workflow **does not publish the package**, it only ensures PRs are safe and code quality is maintained.
+
+---
+
+### 2️⃣ Publish Workflow (`publish.yml`)
+
+- **Trigger:** `on: push` to `main` branch  
+- **Purpose:** build and publish the SDK package to npm  
+- **Jobs:**
+  - Checkout repository
+  - Setup Node.js with npm registry
+  - Cache node modules
+  - Install dependencies (`npm ci`)
+  - TypeScript type check (`npx tsc --noEmit`)
+  - Lint code (`npm run lint`)
+  - Run tests (`npm test`)
+  - Audit dependencies (`npm audit`)
+  - Build package (`npm run build`)
+  - Publish to npm (`npm publish --access public`) using `NODE_AUTH_TOKEN` from GitHub Secrets
+
+> ⚠️ This workflow ensures that **only code merged to main** and passing all checks gets published.
+
+
 ### 📖 Documentation
 
 Full documentation for each utility and service can be found in the `dist` folder or by exploring the TypeScript types.
