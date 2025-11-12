@@ -45,14 +45,9 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     needs: ci
-    if: github.actor == 'mybono'  
+    if: github.actor == 'mybono'
     steps:
-      - name: Checkout PR
-        uses: actions/checkout@v4
-
-      - name: Auto-merge PR if CI passed
-        uses: pascalgn/automerge-action@v0.14.3
-        with:
-          github_token: ${{ secrets.NPM_TOKEN }}
-          merge_method: squash
-          commit_message: title+body
+      - uses: actions/checkout@v4
+      - uses: pascalgn/automerge-action@v0.14.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
