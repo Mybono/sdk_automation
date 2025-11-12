@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/npm/l/sdk_automation?color=blue)
 ![Build](https://img.shields.io/github/actions/workflow/status/Mybono/sdk_automation/build.yml?branch=main&label=CI&color=blue)
 
-**SDK Automation** is a public npm package created for the [QA Portfolio](https://github.com/your-username/qa-portfolio) demo project.  
+**SDK Automation** is a public npm package created for the [QA Portfolio](https://github.com/mybono/qa-portfolio) demo project.  
 It provides utilities, services, and helpers for automated testing, logging, data handling, and test data generation.
 
 ---
