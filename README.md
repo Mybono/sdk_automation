@@ -120,5 +120,3 @@ Found a bug or have a feature request? Open an **issue** or submit a **pull requ
 
 > 💫 If you like this project, please consider giving it a star!  
 > It helps others find it and keeps me motivated 
-
-[NPM_LINK](https://www.npmjs.com/package/sdk_automation)
