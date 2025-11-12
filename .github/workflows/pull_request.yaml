@@ -7,7 +7,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    environment: BASE
     permissions:
       contents: read
 
