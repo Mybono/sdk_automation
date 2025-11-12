@@ -23,3 +23,4 @@ TestResults.xml
 /dist
 /node_modules
 /.env
+/coverage
