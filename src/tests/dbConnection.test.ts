@@ -2,7 +2,7 @@ import { DbConnection } from "../services/DbConnection";
 import { MongoClient } from "mongodb";
 import { logger } from "../utils";
 
-const connectionString ="mongodb://mongo:27017/qa_portfolio"
+const connectionString = "mongodb://mongo:27017/qa_portfolio";
 
 jest.mock("../utils", () => ({
   logger: {
@@ -39,12 +39,8 @@ describe("DbConnection", () => {
   });
 
   it("should return existing connection if already connected", async () => {
-    const firstDb = await dbConnection.openConnection(
-      connectionString,
-    );
-    const secondDb = await dbConnection.openConnection(
-      connectionString,
-    );
+    const firstDb = await dbConnection.openConnection(connectionString);
+    const secondDb = await dbConnection.openConnection(connectionString);
 
     expect(MongoClient).toHaveBeenCalledTimes(1);
     expect(firstDb).toBe(secondDb);

@@ -1,6 +1,6 @@
 {
   "name": "sdk_automation",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "SDK for automation testing with MongoDB",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build",
     "lint": "eslint src --ext .ts --max-warnings=1000",
     "format": "prettier --write .",
-    "test": "jest --passWithNoTests"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

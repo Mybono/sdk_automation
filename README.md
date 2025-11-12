@@ -3,6 +3,9 @@
 ![npm version](https://img.shields.io/npm/v/sdk_automation?color=brightgreen)
 ![License](https://img.shields.io/npm/l/sdk_automation?color=blue)
 ![Build](https://img.shields.io/github/actions/workflow/status/Mybono/sdk_automation/build.yml?branch=main&label=CI&color=blue)
+![npm downloads](https://img.shields.io/npm/dt/sdk_automation?color=orange)
+![Top language](https://img.shields.io/github/languages/top/Mybono/sdk_automation?color=blue)
+![Coverage](https://coveralls.io/repos/github/Mybono/sdk_automation/badge.svg?branch=main)
 
 **SDK Automation** is a public npm package created for the [QA Portfolio](https://github.com/mybono/qa-portfolio) demo project.  
 It provides utilities, services, and helpers for automated testing, logging, data handling, and test data generation.
@@ -73,8 +76,8 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
 
 ### 1️⃣ Pull Request Workflow (`ci-pr.yml`)
 
-- **Trigger:** `on: pull_request` targeting `main` branch  
-- **Purpose:** run full CI for every PR before merge  
+- **Trigger:** `on: pull_request` targeting `main` branch
+- **Purpose:** run full CI for every PR before merge
 - **Jobs:**
   - Checkout repository
   - Setup Node.js
@@ -90,8 +93,8 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
 
 ### 2️⃣ Publish Workflow (`publish.yml`)
 
-- **Trigger:** `on: push` to `main` branch  
-- **Purpose:** build and publish the SDK package to npm  
+- **Trigger:** `on: push` to `main` branch
+- **Purpose:** build and publish the SDK package to npm
 - **Jobs:**
   - Checkout repository
   - Setup Node.js with npm registry
@@ -105,7 +108,6 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
   - Publish to npm (`npm publish --access public`) using `NODE_AUTH_TOKEN` from GitHub Secrets
 
 > ⚠️ This workflow ensures that **only code merged to main** and passing all checks gets published.
-
 
 ### 📖 Documentation
 
