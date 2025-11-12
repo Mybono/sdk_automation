@@ -38,8 +38,12 @@ describe("DbConnection", () => {
   });
 
   it("should return existing connection if already connected", async () => {
-    const firstDb = await dbConnection.openConnection(env.MONGO_CONNECTION_STRING);
-    const secondDb = await dbConnection.openConnection(env.MONGO_CONNECTION_STRING);
+    const firstDb = await dbConnection.openConnection(
+      env.MONGO_CONNECTION_STRING,
+    );
+    const secondDb = await dbConnection.openConnection(
+      env.MONGO_CONNECTION_STRING,
+    );
 
     expect(MongoClient).toHaveBeenCalledTimes(1);
     expect(firstDb).toBe(secondDb);

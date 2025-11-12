@@ -1,5 +1,7 @@
 import { UserRoleType, Credentials } from "../interfaces";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 function requireEnv(name: string): string {
   // eslint-disable-next-line no-undef
   const value = process.env[name];
