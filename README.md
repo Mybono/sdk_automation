@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/npm/l/sdk_automation?color=blue)
 ![Build](https://img.shields.io/github/actions/workflow/status/Mybono/sdk_automation/publish.yml?branch=main&label=CI&color=blue)
 ![npm downloads](https://img.shields.io/npm/dt/sdk_automation?color=orange)
-![Top language](https://img.shields.io/github/languages/top/Mybono/sdk_automation?color=blue)
+![GitHub Repo stars](https://img.shields.io/github/stars/mybono/sdk_automation?color=yellow)
 
 
 **SDK Automation** is a public npm package created for the [QA Portfolio](https://github.com/mybono/qa-portfolio) demo project.  
@@ -117,3 +117,8 @@ Full documentation for each utility and service can be found in the `dist` folde
 
 This package is maintained for the **QA Portfolio** demo project.  
 Found a bug or have a feature request? Open an **issue** or submit a **pull request**.
+
+> 💫 If you like this project, please consider giving it a star!  
+> It helps others find it and keeps me motivated 
+
+[NPM_LINK](https://www.npmjs.com/package/sdk_automation)
