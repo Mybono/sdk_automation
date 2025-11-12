@@ -1,6 +1,6 @@
 {
   "name": "sdk_automation",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "SDK for QA-Portfolio project",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,8 +10,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mybono/qa-portfolio.git"
+    "url": "https://github.com/Mybono/qa-portfolio.git"
   },
+  "homepage": "https://github.com/Mybono/sdk_automation",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
