@@ -1,4 +1,4 @@
-import { User, UserRoleType } from "../interfaces";
+import { User, UserRoleType } from '../interfaces';
 // Omit is a standard utility type, we define it here for clarity if not available globally
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -12,14 +12,15 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 const getRandomInt = (min: number, max: number): number => {
   min = Math.ceil(min);
   max = Math.floor(max);
+
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // --- CONSTANTS ---
-const EMAIL_DOMAINS = ["testmail.com", "example.org", "qa-demo.net", "fake.co"];
+const EMAIL_DOMAINS = ['test_mail.com', 'example.org', 'qa-demo.net', 'fake.co'];
 // Characters allowed for random name generation (letters, numbers, and underscore)
-const NAME_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789_";
-const NUMBERS = "0123456789";
+const NAME_CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789_';
+const NUMBERS = '0123456789';
 
 /**
  * A lightweight utility class mimicking core functionalities of a library like Lodash,
@@ -33,10 +34,11 @@ class TestDataGenerator {
    * @returns A random string.
    */
   public generateRandomString(length: number, chars: string): string {
-    let result = "";
+    let result = '';
     for (let i = 0; i < length; i++) {
       result += chars.charAt(getRandomInt(0, chars.length - 1));
     }
+
     return result;
   }
 
@@ -48,6 +50,7 @@ class TestDataGenerator {
     const areaCode = getRandomInt(200, 999).toString();
     const prefix = getRandomInt(100, 999).toString();
     const lineNumber = getRandomInt(1000, 9999).toString();
+
     return `(${areaCode}) ${prefix}-${lineNumber}`;
   }
 
@@ -58,6 +61,7 @@ class TestDataGenerator {
   public getRandomFirstName(): string {
     const length = getRandomInt(6, 12);
     const randomString = this.generateRandomString(length, NAME_CHARS);
+
     // Capitalize the first letter for readability
     return randomString.charAt(0).toUpperCase() + randomString.slice(1);
   }
@@ -69,6 +73,7 @@ class TestDataGenerator {
   public getRandomLastName(): string {
     const length = getRandomInt(6, 12);
     const randomString = this.generateRandomString(length, NAME_CHARS);
+
     // Capitalize the first letter for readability
     return randomString.charAt(0).toUpperCase() + randomString.slice(1);
   }
@@ -89,6 +94,7 @@ class TestDataGenerator {
    */
   public getRandomEmail(userName: string): string {
     const domain = EMAIL_DOMAINS[getRandomInt(0, EMAIL_DOMAINS.length - 1)];
+
     return `${userName}@${domain}`;
   }
 
@@ -98,15 +104,16 @@ class TestDataGenerator {
    * @param userRole The specific role to assign to the generated user.
    * @returns An object of type Omit<User, '_id'>.
    */
-  public getRandomUser(userRole: UserRoleType): Omit<User, "_id"> {
+  public getRandomUser(userRole: UserRoleType): Omit<User, '_id'> {
     const firstName = this.getRandomFirstName();
     const lastName = this.getRandomLastName();
     // Generate a unique username by combining parts of the name and a random number string
-    const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}_${this.generateRandomString(4, NUMBERS)}`;
+    const username = `${firstName.toLowerCase()}.
+    ${lastName.toLowerCase()}_${this.generateRandomString(4, NUMBERS)}`;
 
     // Note: The phone field is included here based on your last code snippet,
     // assuming it is either optional in the User interface or you intended to add it.
-    const newUser: Omit<User, "_id"> = {
+    const newUser: Omit<User, '_id'> = {
       username: username,
       role: userRole,
       firstName: firstName,
@@ -117,6 +124,7 @@ class TestDataGenerator {
       email: this.getRandomEmail(username),
       phone: this.getRandomPhoneNumber(),
     };
+
     return newUser;
   }
 }

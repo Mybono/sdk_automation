@@ -5,7 +5,7 @@ import {
   UpdateFilter,
   WithId,
   OptionalUnlessRequiredId,
-} from "mongodb";
+} from 'mongodb';
 
 export class MongoService<T extends { _id?: ObjectId }> {
   constructor(readonly collection: Collection<T>) {}
@@ -14,10 +14,9 @@ export class MongoService<T extends { _id?: ObjectId }> {
     return this.collection.findOne(query as Filter<T>);
   }
 
-  async insertOne(doc: Omit<T, "_id">): Promise<WithId<T>> {
-    const result = await this.collection.insertOne(
-      doc as OptionalUnlessRequiredId<T>,
-    );
+  async insertOne(doc: Omit<T, '_id'>): Promise<WithId<T>> {
+    const result = await this.collection.insertOne(doc as OptionalUnlessRequiredId<T>);
+
     return { _id: result.insertedId, ...doc } as WithId<T>;
   }
 
@@ -25,13 +24,15 @@ export class MongoService<T extends { _id?: ObjectId }> {
     const result = await this.collection.findOneAndUpdate(
       { _id: id } as Filter<T>,
       { $set: update } as unknown as UpdateFilter<T>,
-      { returnDocument: "after" },
+      { returnDocument: 'after' },
     );
+
     return (result as unknown as { value: WithId<T> | null }).value ?? null;
   }
 
   async deleteOne(id: ObjectId): Promise<boolean> {
     const result = await this.collection.deleteOne({ _id: id } as Filter<T>);
+
     return result.deletedCount === 1;
   }
 }

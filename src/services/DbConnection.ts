@@ -1,5 +1,5 @@
-import { MongoClient, Db } from "mongodb";
-import { logger } from "../utils";
+import { MongoClient, Db } from 'mongodb';
+import { logger } from '../utils';
 
 /**
  * Singleton class to manage the single connection instance to MongoDB.
@@ -19,6 +19,7 @@ export class DbConnection {
     if (!DbConnection.instance) {
       DbConnection.instance = new DbConnection();
     }
+
     return DbConnection.instance;
   }
 
@@ -37,7 +38,8 @@ export class DbConnection {
 
     this.db = this.client.db();
     this.isConnected = true;
-    logger.info("[openConnection] Connected successfully");
+    logger.info('[openConnection] Connected successfully');
+
     return this.db;
   }
 
@@ -51,7 +53,7 @@ export class DbConnection {
       this.isConnected = false;
       this.client = null;
       this.db = null;
-      logger.warn("[closeConnection]: Connection closed");
+      logger.warn('[closeConnection]: Connection closed');
     }
   }
 }
