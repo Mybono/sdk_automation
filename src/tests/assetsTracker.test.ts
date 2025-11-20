@@ -1,5 +1,6 @@
 import { ObjectId, Collection, Db } from 'mongodb';
 import { AssetsTracker } from '../utils/assetsTracker';
+import { collections } from '../interfaces';
 import { logger } from '../utils/logger';
 
 jest.mock('../utils/logger', () => ({
@@ -13,7 +14,7 @@ jest.mock('../utils/logger', () => ({
 
 describe('AssetsTracker', () => {
   let mockDb: Db;
-  let mockCollection: Collection<any>;
+  let mockCollection: Collection<typeof collections>;
   let tracker: AssetsTracker;
 
   beforeEach(() => {
@@ -21,7 +22,7 @@ describe('AssetsTracker', () => {
 
     mockCollection = {
       deleteMany: jest.fn().mockResolvedValue({ deletedCount: 2 }),
-    } as unknown as Collection<any>;
+    } as unknown as Collection<typeof collections>;
 
     mockDb = {
       collection: jest.fn(() => mockCollection),

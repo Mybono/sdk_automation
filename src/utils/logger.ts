@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 type LogLevel = 'log' | 'info' | 'warn' | 'error' | 'debug';
 
 class Logger {

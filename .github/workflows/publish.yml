@@ -1,8 +1,10 @@
 name: 📦 Publish SDK package to npm
 
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: ["🔍 PR Checks"]
+    types:
+      - completed
 
 jobs:
   publish:
