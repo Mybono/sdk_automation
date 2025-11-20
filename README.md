@@ -75,13 +75,13 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
 
 ### 1️⃣ Pull Request Workflow
 
-
 - **Trigger:** Runs on `pull_request` events targeting the `main` branch (`opened`, `synchronize`, `reopened`).  
 - **Purpose:** Executes a full CI workflow for every PR before merge.  
 
 #### Jobs:
 
-- 🚀 pr-checkmate
+- 🚀 [pr-checkmate](https://dev.to/deftoexplore/pr-checkmate-stop-debating-style-and-start-coding-ij) 
+**A set of automated checks for Pull Requests**
   - ESLint checks  
   - Dependency change detection  
   - Prettier auto-formatting  
