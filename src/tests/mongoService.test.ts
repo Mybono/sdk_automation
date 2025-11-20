@@ -1,5 +1,5 @@
-import { MongoService } from "../services";
-import { Collection, ObjectId } from "mongodb";
+import { MongoService } from '../services';
+import { Collection, ObjectId } from 'mongodb';
 
 interface User {
   _id?: ObjectId;
@@ -7,13 +7,13 @@ interface User {
   email: string;
 }
 
-describe("MongoService", () => {
+describe('MongoService', () => {
   let mockCollection: Partial<Collection<User>>;
   let service: MongoService<User>;
 
-  const userData: Omit<User, "_id"> = {
-    username: "testuser",
-    email: "test@example.com",
+  const userData: Omit<User, '_id'> = {
+    username: 'testUser',
+    email: 'test@example.com',
   };
   const fakeId = new ObjectId();
 
@@ -28,21 +28,21 @@ describe("MongoService", () => {
     jest.clearAllMocks();
   });
 
-  it("should find a document", async () => {
+  it('should find a document', async () => {
     (mockCollection.findOne as jest.Mock).mockResolvedValueOnce({
       _id: fakeId,
       ...userData,
     });
 
-    const result = await service.findOne({ username: "testuser" });
+    const result = await service.findOne({ username: 'testUser' });
 
     expect(mockCollection.findOne).toHaveBeenCalledWith({
-      username: "testuser",
+      username: 'testUser',
     });
     expect(result).toEqual({ _id: fakeId, ...userData });
   });
 
-  it("should insert a document", async () => {
+  it('should insert a document', async () => {
     (mockCollection.insertOne as jest.Mock).mockResolvedValueOnce({
       insertedId: fakeId,
     });
@@ -53,36 +53,36 @@ describe("MongoService", () => {
     expect(result).toEqual({ _id: fakeId, ...userData });
   });
 
-  it("should update a document", async () => {
+  it('should update a document', async () => {
     const updatedUser = {
       _id: fakeId,
-      username: "updated",
-      email: "test@example.com",
+      username: 'updated',
+      email: 'test@example.com',
     };
     (mockCollection.findOneAndUpdate as jest.Mock).mockResolvedValueOnce({
       value: updatedUser,
     });
 
-    const result = await service.updateOne(fakeId, { username: "updated" });
+    const result = await service.updateOne(fakeId, { username: 'updated' });
 
     expect(mockCollection.findOneAndUpdate).toHaveBeenCalledWith(
       { _id: fakeId },
-      { $set: { username: "updated" } },
-      { returnDocument: "after" },
+      { $set: { username: 'updated' } },
+      { returnDocument: 'after' },
     );
     expect(result).toEqual(updatedUser);
   });
 
-  it("should return null if update finds nothing", async () => {
+  it('should return null if update finds nothing', async () => {
     (mockCollection.findOneAndUpdate as jest.Mock).mockResolvedValueOnce({
       value: null,
     });
 
-    const result = await service.updateOne(fakeId, { username: "updated" });
+    const result = await service.updateOne(fakeId, { username: 'updated' });
     expect(result).toBeNull();
   });
 
-  it("should delete a document successfully", async () => {
+  it('should delete a document successfully', async () => {
     (mockCollection.deleteOne as jest.Mock).mockResolvedValueOnce({
       deletedCount: 1,
     });
@@ -93,7 +93,7 @@ describe("MongoService", () => {
     expect(result).toBe(true);
   });
 
-  it("should return false if document was not deleted", async () => {
+  it('should return false if document was not deleted', async () => {
     (mockCollection.deleteOne as jest.Mock).mockResolvedValueOnce({
       deletedCount: 0,
     });

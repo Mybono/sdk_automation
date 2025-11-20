@@ -1,5 +1,5 @@
 export const collections = {
-  users: "users",
+  users: 'users',
 } as const;
 
 export type CollectionsType = (typeof collections)[keyof typeof collections];

@@ -1,9 +1,9 @@
-import { UserRole } from "../interfaces";
-import { UserService } from "../services";
-import { ObjectId } from "mongodb";
-import { _ } from "../utils";
+import { UserRole } from '../interfaces';
+import { UserService } from '../services';
+import { ObjectId } from 'mongodb';
+import { _ } from '../utils';
 
-describe("UserService", () => {
+describe('UserService', () => {
   const mockInsertOne = jest.fn();
   const mockFindOne = jest.fn();
 
@@ -22,14 +22,14 @@ describe("UserService", () => {
     service = new UserService(mockDb);
   });
 
-  it("should create user with valid email", async () => {
-    const dammyUser = _.getRandomUser(UserRole.standard_user);
+  it('should create user with valid email', async () => {
+    const dummyUser = _.getRandomUser(UserRole.standard_user);
     const fakeId = new ObjectId();
     mockInsertOne.mockResolvedValueOnce({ insertedId: fakeId });
 
-    const result = await service.createUser(UserRole.standard_user, dammyUser);
+    const result = await service.createUser(UserRole.standard_user, dummyUser);
 
-    expect(mockInsertOne).toHaveBeenCalledWith(dammyUser);
-    expect(result).toEqual({ ...dammyUser, _id: fakeId });
+    expect(mockInsertOne).toHaveBeenCalledWith(dummyUser);
+    expect(result).toEqual({ ...dummyUser, _id: fakeId });
   });
 });
