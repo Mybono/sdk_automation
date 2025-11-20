@@ -13,7 +13,7 @@ export const selectors = {
     fleeceJacket: '[data-test="add-to-cart-sauce-labs-fleece-jacket"]',
     labSonesie: '[data-test="add-to-cart-sauce-labs-onesie"]',
     shirtRed: '[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]',
-    menuButton: "#react-burger-menu-btn",
+    menuButton: '#react-burger-menu-btn',
     logoutLink: '[data-test="logout-sidebar-link"]',
     pageTitle: '[data-test="title"]',
     cartBadge: '[data-test="shopping-cart-badge"]',
@@ -26,7 +26,7 @@ export const selectors = {
     continueShopping: '[data-test="continue-shopping"]',
     checkoutBtn: '[data-test="checkout"]',
     inventory_item_price: '[data-test="inventory-item-price"]',
-    inventory_item_name: ".inventory_item_name",
+    inventory_item_name: '.inventory_item_name',
   },
   checkout: {
     continueBtn: '[data-test="continue"]',
@@ -41,10 +41,10 @@ export const selectors = {
   },
   filter: {
     sortDropdown: 'select[data-test="product-sort-container"]',
-    highToLow: "hilo",
-    lowToHigh: "lohi",
-    nameAZ: "az",
-    nameZA: "za",
+    highToLow: 'hilo',
+    lowToHigh: 'lohi',
+    nameAZ: 'az',
+    nameZA: 'za',
   },
   removeButtons: {
     backpack: "[data-test='remove-sauce-labs-backpack']",

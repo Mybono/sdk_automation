@@ -1,0 +1,130 @@
+name: 🔍 PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  pr-checkmate:
+    name: 🚀 pr-checkmate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Run PR CheckMate
+        run: npx pr-checkmate all
+
+  pr-validation:
+      name: ✅ PR Validation
+      runs-on: ubuntu-latest
+      steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📏 Check PR size
+        run: |
+          FILES_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)
+          LINES_CHANGED=$(git diff --stat origin/${{ github.base_ref }}...HEAD | tail -1 | awk '{print $4+$6}')
+          
+          echo "Files changed: $FILES_CHANGED"
+          echo "Lines changed: $LINES_CHANGED"
+          
+          if [ $FILES_CHANGED -gt 50 ]; then
+            echo "⚠️ Warning: PR changes more than 50 files"
+          fi
+          
+          if [ $LINES_CHANGED -gt 1000 ]; then
+            echo "⚠️ Warning: PR changes more than 1000 lines"
+          fi
+
+      - name: 📊 Generate PR metrics
+        run: |
+          echo "## 📊 PR Metrics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Files changed: $(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "- Lines added: $(git diff --stat origin/${{ github.base_ref }}...HEAD | tail -1 | awk '{print $4}')" >> $GITHUB_STEP_SUMMARY
+          echo "- Lines deleted: $(git diff --stat origin/${{ github.base_ref }}...HEAD | tail -1 | awk '{print $6}')" >> $GITHUB_STEP_SUMMARY
+          echo "- Commits: $(git rev-list --count origin/${{ github.base_ref }}..HEAD)" >> $GITHUB_STEP_SUMMARY
+
+  # =======================================================
+  # Update Changelog
+  # =======================================================
+  update-changelog:
+    name: 📝 Update Changelog
+    runs-on: ubuntu-latest
+    needs: [pr-checkmate, pr-validation]
+    steps:
+      - name: 📥 Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 📝 Determine bump type
+        id: bump
+        run: |
+          if git log origin/${{ github.base_ref }}..HEAD --pretty=format:"%s" | grep -q "^feat:"; then
+            echo "bump_type=minor" >> $GITHUB_OUTPUT
+          else
+            echo "bump_type=patch" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📝 Generate/Update CHANGELOG.md
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          npx standard-version --skip.tag --skip.commit --release-as ${{ steps.bump.outputs.bump_type }}
+
+          git add CHANGELOG.md package.json package-lock.json
+
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: update CHANGELOG.md"
+            git push origin HEAD:${{ github.head_ref }}
+          else
+            echo "No changes to CHANGELOG.md"
+          fi
+
+  # =======================================================
+  # Auto-merge PR 
+  # =======================================================
+  auto-merge:
+    name: 🤖 Auto-merge PR
+    runs-on: ubuntu-latest
+    needs: [update-changelog]
+    if: github.repository == github.event.repository.full_name
+    steps:
+      - name: 🔀 Enable auto-merge
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} \
+            --merge \
+            --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
