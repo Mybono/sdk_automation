@@ -73,24 +73,39 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
 
 ---
 
-### 1️⃣ Pull Request Workflow (`ci-pr.yml`)
+### 1️⃣ Pull Request Workflow
 
-- **Trigger:** `on: pull_request` targeting `main` branch
-- **Purpose:** run full CI for every PR before merge
-- **Jobs:**
-  - Checkout repository
-  - Setup Node.js
-  - Install dependencies (`npm ci`)
-  - TypeScript type check (`npx tsc --noEmit`)
-  - Lint code (`npm run lint`)
-  - Run unit tests (`npm test`)
-  - Audit dependencies (`npm audit --audit-level=moderate`)
+
+- **Trigger:** Runs on `pull_request` events targeting the `main` branch (`opened`, `synchronize`, `reopened`).  
+- **Purpose:** Executes a full CI workflow for every PR before merge.  
+
+#### Jobs:
+
+- 🚀 pr-checkmate
+  - ESLint checks  
+  - Dependency change detection  
+  - Prettier auto-formatting  
+  - Spellcheck (`cspell`)  
+
+- ✅ pr-validation
+  - Checks PR size (number of files and lines changed)  
+  - Generates PR metrics summary for quick review  
+
+- 📝 update-changelog
+  - Automatically updates `CHANGELOG.md` based on conventional commits  
+  - Determines semantic version bump (patch/minor/major) according to commit types  
+
+- 🤖 auto-merge
+  - Automatically merges the PR once all checks pass and changelog is updated
+
+![pr-pipelne](./src/assets/pr_pipeline.png)
 
 > ⚠️ This workflow **does not publish the package**, it only ensures PRs are safe and code quality is maintained.
 
 ---
 
-### 2️⃣ Publish Workflow (`publish.yml`)
+### 2️⃣ Publish Workflow
+> Runs automatically if the Pull Request Workflow was successful
 
 - **Trigger:** `on: push` to `main` branch
 - **Purpose:** build and publish the SDK package to npm
@@ -98,13 +113,9 @@ This project has **two GitHub Actions workflows** to ensure code quality and aut
   - Checkout repository
   - Setup Node.js with npm registry
   - Cache node modules
-  - Install dependencies (`npm ci`)
-  - TypeScript type check (`npx tsc --noEmit`)
-  - Lint code (`npm run lint`)
-  - Run tests (`npm test`)
-  - Audit dependencies (`npm audit`)
-  - Build package (`npm run build`)
-  - Publish to npm (`npm publish --access public`) using `NODE_AUTH_TOKEN` from GitHub Secrets
+  - Install dependencies 
+  - Build package 
+  - Publish to npm 
 
 > ⚠️ This workflow ensures that **only code merged to main** and passing all checks gets published.
 
